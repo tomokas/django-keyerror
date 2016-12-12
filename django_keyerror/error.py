@@ -96,6 +96,17 @@ class DjangoError(Error):
 
         return {}
 
+class MinimalDjangoError(Error):
+    """
+    Like DjangoError, except doesn't require a request.
+    """
+    def __init__(self, *args, **kwargs):
+        super(MinimalDjangoError, self).__init__(*args, **kwargs)
+
+        self.update({
+            'type': 'django',
+        })
+
 class QueueError(Error):
     def __init__(self, *args, **kwargs):
         super(QueueError, self).__init__(*args, **kwargs)
